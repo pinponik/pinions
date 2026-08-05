@@ -10,7 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@stable
-      - name: Cargo check
-        run: cargo check
+      - name: Cargo install cargo-hack
+        run: cargo install cargo-hack
+      - name: Cargo hack check --each-feature
+        run: cargo hack check --each-feature
       - name: Cargo clippy
         run: cargo clippy
