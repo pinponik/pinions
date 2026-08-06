@@ -1,5 +1,5 @@
 use crate::*;
 
-trait App {
+pub trait App {
     fn view(&mut self, ctx: &mut Ctx) -> ();
 }
