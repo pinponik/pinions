@@ -27,3 +27,15 @@ pub type Str<const N: usize> = String;
 
 #[cfg(feature = "no_std")]
 pub type Str<const N: usize> = heapless::String<N>;
+
+pub trait ToPStr<const N: usize> {
+    fn to_pstr(&self) -> Str<N>;
+}
+
+impl<const N: usize> ToPStr<N> for str {
+    fn to_pstr(&self) -> Str<N> {
+        let mut s = Str::<N>::new();
+        s.push_str(self);
+        s
+    }
+}
