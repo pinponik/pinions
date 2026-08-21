@@ -8,10 +8,12 @@ use heapless;
 mod app_trait;
 mod ctx;
 pub mod prelude;
+mod widget;
 mod window;
 
 pub use app_trait::*;
 pub use ctx::*;
+pub use widget::*;
 pub use window::*;
 
 static MAX: usize = core::usize::MAX;
