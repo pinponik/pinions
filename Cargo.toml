@@ -30,6 +30,12 @@ pinions-macros = { path = "pinions-macros" }
 num = "0.1.43"
 
 [features]
-default = []              #"no_std"]
+#default = []
+#default = ["no_std"]
+default = ["button"]
 no_std = ["dep:heapless"]
 debug = []
+
+all = ["button"]
+
+button = []

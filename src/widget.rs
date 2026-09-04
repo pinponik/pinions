@@ -1,3 +1,6 @@
 use crate::*;
 
-pub trait Widget {}
+pub enum Widget {
+    #[cfg(feature = "button")]
+    Button { label: String },
+}
