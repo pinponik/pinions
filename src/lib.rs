@@ -8,12 +8,12 @@ use heapless;
 mod app_trait;
 mod ctx;
 pub mod prelude;
-mod widget;
+mod shape;
 mod window;
 
 pub use app_trait::*;
 pub use ctx::*;
-pub use widget::*;
+pub use shape::*;
 pub use window::*;
 
 static MAX: usize = core::usize::MAX;
@@ -40,4 +40,11 @@ impl<const N: usize> ToPStr<N> for str {
         s.push_str(self);
         s
     }
+}
+
+pub struct Color {
+    r: u8,
+    g: u8,
+    b: u8,
+    a: u8,
 }

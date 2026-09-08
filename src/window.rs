@@ -4,14 +4,14 @@ pub struct Window<const T: usize, const W: usize> {
     title: Str<T>,
     size: (usize, usize),
     location: (usize, usize),
-    widgets: Vect<Widget, W>,
+    shapes: Vect<Shape, W>,
 }
 
 pub const WINDOW: Window<0, 0> = Window::<0, 0> {
     title: Str::<MAX>::new(),
     size: (0, 0),
     location: (0, 0),
-    widgets: Vect::<Widget, 0>::new(),
+    shapes: Vect::<Shape, 0>::new(),
 };
 
 impl<const T: usize, const W: usize> Window<T, W> {
@@ -20,7 +20,7 @@ impl<const T: usize, const W: usize> Window<T, W> {
             title,
             size,
             location,
-            widgets: Vect::<Widget, W>::new(),
+            shapes: Vect::<Shape, W>::new(),
         }
     }
 
@@ -48,7 +48,7 @@ impl<const T: usize, const W: usize> Window<T, W> {
         self.location
     }
 
-    pub fn add(&mut self, widget: Widget) {
-        self.widgets.push(widget);
+    pub fn add(&mut self, widget: Shape) {
+        self.shapes.push(widget);
     }
 }
