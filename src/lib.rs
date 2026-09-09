@@ -8,13 +8,15 @@ use heapless;
 mod app_trait;
 mod ctx;
 pub mod prelude;
+mod run;
 mod shape;
-mod window;
+mod windows;
 
 pub use app_trait::*;
 pub use ctx::*;
+pub use run::*;
 pub use shape::*;
-pub use window::*;
+pub use windows::*;
 
 static MAX: usize = core::usize::MAX;
 
@@ -47,4 +49,9 @@ pub struct Color {
     g: u8,
     b: u8,
     a: u8,
+}
+
+pub enum Flow {
+    Wait,
+    Poll,
 }

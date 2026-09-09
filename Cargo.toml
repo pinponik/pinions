@@ -24,18 +24,17 @@ categories = ["gui", "ui", "graphics", "interface", "widgets"]
 license = "MIT OR Apache-2.0"
 
 [dependencies]
-heapless = { version = "0.9.3", optional = true }
-winit = "0.30.13"
 pinions-macros = { path = "pinions-macros" }
 num = "0.1.43"
 
+[target.'cfg(not(feature = "no_std"))'.dependencies]
+winit = "0.30.13"
+
+[target.'cfg(feature = "no_std")'.dependencies]
+heapless = "0.9.3"
+
 [features]
-#default = []
+default = []
 #default = ["no_std"]
-default = ["button"]
-no_std = ["dep:heapless"]
+no_std = []
 debug = []
-
-all = ["button"]
-
-button = []

@@ -24,5 +24,5 @@ impl App<0, 0> for Counter {
 
 fn main() {
     let mut app = Counter::default();
-    pinions::run(&mut app);
+    pinions::run(&mut app, Flow::Wait);
 }
