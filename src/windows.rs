@@ -7,7 +7,7 @@ pub struct Window<const T: usize, const W: usize> {
 }
 
 pub const WINDOW: Window<0, 0> = Window::<0, 0> {
-    title: Str::<MAX>::new(),
+    title: Str::<0>::new(),
     size: (0, 0),
     location: (0, 0),
 };

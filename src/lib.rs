@@ -2,20 +2,34 @@
 //!
 
 #![cfg_attr(feature = "no_std", no_std)]
+
+#[cfg(all(feature = "std", feature = "no_std"))]
+compile_error!(
+    "Feature conflict: You cannot enable both 'std' and 'no_std' features at the same time.\
+                Choose exactly one."
+);
+
+#[cfg(not(any(feature = "std", feature = "no_std")))]
+compile_error!(
+    "Feature missing: You must enable either 'std' or 'no_std' feature.\
+                Leaving both disabled is not allowed."
+);
+
 #[cfg(feature = "no_std")]
 use heapless;
 
 mod app_trait;
 mod ctx;
 pub mod prelude;
-mod run;
 mod shape;
+#[cfg(feature = "std")]
+mod std_run;
 mod windows;
 
 pub use app_trait::*;
 pub use ctx::*;
-pub use run::*;
 pub use shape::*;
+pub use std_run::*;
 pub use windows::*;
 
 static MAX: usize = core::usize::MAX;

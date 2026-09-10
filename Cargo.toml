@@ -26,15 +26,12 @@ license = "MIT OR Apache-2.0"
 [dependencies]
 pinions-macros = { path = "pinions-macros" }
 num = "0.1.43"
-
-[target.'cfg(not(feature = "no_std"))'.dependencies]
-winit = "0.30.13"
-
-[target.'cfg(feature = "no_std")'.dependencies]
-heapless = "0.9.3"
+winit = { version = "0.30.13", optional = true }
+heapless = { version = "0.9.3", optional = true }
 
 [features]
-default = []
+default = ["std"]
 #default = ["no_std"]
-no_std = []
+std = ["dep:winit"]
+no_std = ["dep:heapless"]
 debug = []
