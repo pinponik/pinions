@@ -3,6 +3,8 @@ use crate::*;
 pub struct Ctx<const T: usize, const W: usize> {
     drawing: bool,
     windows: Vect<Window<T, W>, MAX>,
+    pub close: bool,
+    pub should_close: bool,
 }
 
 impl<const T: usize, const W: usize> Ctx<T, W> {
@@ -20,5 +22,9 @@ impl<const T: usize, const W: usize> Ctx<T, W> {
     /// Returns a mutable reference to a window by index.
     pub fn window(&mut self, win: usize) -> &mut Window<T, W> {
         &mut self.windows[win]
+    }
+
+    pub fn close(&mut self) {
+        self.close = true;
     }
 }
