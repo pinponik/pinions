@@ -6,7 +6,7 @@ struct Counter {
 }
 
 impl App<0, 0> for Counter {
-    fn new(&mut self, ctx: &mut Ctx<0, 0>) {
+    fn run(&mut self, ctx: &mut Ctx<0, 0>) {
         // ctx.add_window(Window::new(
         //     "Counter",
         //     0,

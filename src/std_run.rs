@@ -33,5 +33,7 @@ impl<A: App<T, W>, const T: usize, const W: usize> ApplicationHandler for Applic
 }
 
 pub fn run<const T: usize, const W: usize, A: App<T, W>>(app: &mut A, flow: Flow) {
+    let mut ctx = Ctx::new();
+    app.run(&mut ctx);
     let event_loop = EventLoop::new();
 }

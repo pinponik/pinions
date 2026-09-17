@@ -69,3 +69,15 @@ pub enum Flow {
     Wait,
     Poll,
 }
+
+impl Default for Flow {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl Flow {
+    pub fn new() -> Self {
+        Self::Wait
+    }
+}
