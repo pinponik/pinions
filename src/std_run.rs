@@ -1,5 +1,6 @@
 use crate::*;
 
+use vello;
 use winit::application::ApplicationHandler;
 use winit::event::WindowEvent;
 use winit::event_loop::{ActiveEventLoop, ControlFlow, EventLoop};

@@ -26,12 +26,13 @@ license = "MIT OR Apache-2.0"
 [dependencies]
 pinions-macros = { path = "pinions-macros" }
 num = "0.1.43"
+vello = { version = "0.10.0", optional = true }
 winit = { version = "0.30.13", optional = true }
 heapless = { version = "0.9.3", optional = true }
 
 [features]
 default = ["std"]
 #default = ["no_std"]
-std = ["dep:winit"]
+std = ["dep:winit", "dep:vello"]
 no_std = ["dep:heapless"]
 debug = []
