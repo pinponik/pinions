@@ -14,6 +14,7 @@ compile_error!(
     "Feature missing: You must enable either 'std' or 'no_std' feature.\
                 Leaving both disabled is not allowed."
 );
+// TODO: To not make errors in GH CI for checking all features combinations.
 
 #[cfg(feature = "no_std")]
 use heapless;
