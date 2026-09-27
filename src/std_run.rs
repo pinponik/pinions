@@ -1,13 +1,21 @@
 use crate::*;
 
-use vello;
+use vello::util::{RenderContext, RenderSurface};
+use vello::{Renderer, RendererOptions, Scene};
 use winit::application::ApplicationHandler;
 use winit::event::WindowEvent;
 use winit::event_loop::{ActiveEventLoop, ControlFlow, EventLoop};
 use winit::window::{Window, WindowId};
 
+struct VelloState {
+    context: RenderContext,
+    renderer: Renderer,
+    surface: RenderSurface<'static>,
+    scene: Scene,
+}
+
 struct Application<A: App<T, W>, const T: usize, const W: usize> {
-    windows: Vect<Option<Window>, W>,
+    windows: Vec<Option<Window>>,
     app: A,
     ctx: Ctx<T, W>,
 }
@@ -26,11 +34,15 @@ impl<A: App<T, W>, const T: usize, const W: usize> ApplicationHandler for Applic
     fn window_event(&mut self, event_loop: &ActiveEventLoop, id: WindowId, event: WindowEvent) {
         match event {
             WindowEvent::CloseRequested => {
-                self.ctx.should_close = true;
+                for window in self.ctx.windows.iter_mut() {
+                    window.should_close = true;
+                }
             }
             WindowEvent::RedrawRequested => {
-                for window in self.windows.iter_mut() {
-                    window.as_ref().unwrap().request_redraw();
+                for i in 0..self.ctx.windows.len() {
+                    if let Some(window) = &mut self.windows[i] {
+                        self.windows[i].as_ref().unwrap().request_redraw();
+                    }
                 }
             }
             _ => {}

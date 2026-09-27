@@ -2,9 +2,7 @@ use crate::*;
 
 pub struct Ctx<const T: usize, const W: usize> {
     drawing: bool,
-    windows: Vect<Window<T, W>, MAX>,
-    pub close: bool,
-    pub should_close: bool,
+    pub(crate) windows: Vect<Window<T>, W>,
     pub flow: Flow,
 }
 
@@ -13,8 +11,6 @@ impl<const T: usize, const W: usize> Ctx<T, W> {
         Self {
             drawing: true,
             windows: Vect::new(),
-            close: false,
-            should_close: false,
             flow: Flow::default(),
         }
     }
@@ -31,15 +27,11 @@ impl<const T: usize, const W: usize> Ctx<T, W> {
     }
 
     /// Returns a mutable reference to a window by index.
-    pub fn window(&mut self, win: usize) -> &mut Window<T, W> {
+    pub fn window(&mut self, win: usize) -> &mut Window<T> {
         &mut self.windows[win]
     }
 
-    pub fn close(&mut self) {
-        self.close = true;
-    }
-
-    pub fn add_window(&mut self, window: Window<T, W>) {
+    pub fn add_window(&mut self, window: Window<T>) {
         self.windows.push(window);
     }
 }
