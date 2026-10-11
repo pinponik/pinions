@@ -7,11 +7,8 @@ use winit::event::WindowEvent;
 use winit::event_loop::{ActiveEventLoop, ControlFlow, EventLoop};
 use winit::window::{Window, WindowId};
 
-struct VelloState {
-    context: RenderContext,
-    renderer: Renderer,
-    surface: RenderSurface<'static>,
-    scene: Scene,
+struct WindowState {
+    window: Arc<Window>,
 }
 
 struct Application<A: App<T, W>, const T: usize, const W: usize> {
