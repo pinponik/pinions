@@ -10,6 +10,7 @@ use winit::window::{Window, WindowId};
 
 struct WindowState {
     window: Arc<Window>,
+    ctx: vello_cpu::RenderContext,
 }
 
 struct Application<A: App<T, W>, const T: usize, const W: usize> {
@@ -17,6 +18,8 @@ struct Application<A: App<T, W>, const T: usize, const W: usize> {
     app: A,
     ctx: Ctx<T, W>,
     device: wgpu::Device,
+    queue: wgpu::Queue,
+    renderer: vello::Renderer,
 }
 
 impl WindowState {}
@@ -29,6 +32,7 @@ impl<A: App<T, W>, const T: usize, const W: usize> ApplicationHandler for Applic
                 .unwrap();
             self.windows[i] = Some(WindowState {
                 window: Arc::new(win),
+                ctx: vello_cpu::RenderContext::new(16, 16),
             });
         }
     }
