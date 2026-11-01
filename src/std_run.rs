@@ -1,6 +1,7 @@
 use crate::*;
 
 use vello::util::{RenderContext, RenderSurface};
+use vello::wgpu;
 use vello::{Renderer, RendererOptions, Scene};
 use winit::application::ApplicationHandler;
 use winit::event::WindowEvent;
@@ -12,19 +13,23 @@ struct WindowState {
 }
 
 struct Application<A: App<T, W>, const T: usize, const W: usize> {
-    windows: Vec<Option<Window>>,
+    windows: Vec<Option<WindowState>>,
     app: A,
     ctx: Ctx<T, W>,
+    device: wgpu::Device,
 }
+
+impl WindowState {}
 
 impl<A: App<T, W>, const T: usize, const W: usize> ApplicationHandler for Application<A, T, W> {
     fn resumed(&mut self, event_loop: &ActiveEventLoop) {
         for i in 0..W {
-            self.windows[i] = Some(
-                event_loop
-                    .create_window(Window::default_attributes())
-                    .unwrap(),
-            );
+            let win = event_loop
+                .create_window(Window::default_attributes())
+                .unwrap();
+            self.windows[i] = Some(WindowState {
+                window: Arc::new(win),
+            });
         }
     }
 

@@ -33,6 +33,8 @@ pub use shape::*;
 pub use std_run::*;
 pub use windows::*;
 
+pub use std::sync::Arc;
+
 static MAX: usize = core::usize::MAX;
 
 #[cfg(not(feature = "no_std"))]
